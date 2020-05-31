@@ -1,6 +1,9 @@
 #pragma once
 #include "pclFunction.h"
 
+using namespace std;
+using namespace pcl;
+
 void CustomVisualizer::init() {
 	viewer->createViewPort(0.0, 0.0, 0.5, 1.0, v1);
 	viewer->setBackgroundColor(0, 0, 0, v1);
@@ -15,14 +18,6 @@ void CustomVisualizer::init() {
 
 	viewer->initCameraParameters();
 }
-void CustomVisualizer::addCloud(const PointCloudType::ConstPtr cloud, const std::string& ID, int& viewport) {
-	pcl::visualization::PointCloudColorHandlerRGBField<PointType> single_color(cloud);
-	viewer->addPointCloud<PointType>(cloud, single_color, ID, viewport);
-	viewer->setPointCloudRenderingProperties(pcl::visualization::PCL_VISUALIZER_POINT_SIZE, 1, ID);
-}
-void CustomVisualizer::updateCloud(const PointCloudType::ConstPtr cloud, const std::string& ID) {
-	viewer->updatePointCloud(cloud, ID);
-}
 
 /**
 * @brief The PassThrough filter is used to identify and/or eliminate points
@@ -31,6 +26,7 @@ within a specific range of X, Y and Z values.
 * @param cloud_out - cloud after the application of the filter - cloud after the application of the filter
 * @return void
 */
+
 void passthrough(const PointCloudType::ConstPtr& cloud_in, vector<float> limits, PointCloudType::Ptr& cloud_out)
 {
 	pcl::PassThrough<PointType> pt;

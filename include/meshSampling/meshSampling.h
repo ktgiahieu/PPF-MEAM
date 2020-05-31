@@ -17,10 +17,6 @@
 #include <pcl/console/print.h>
 #include <pcl/console/parse.h>
 
-using namespace pcl;
-using namespace pcl::io;
-using namespace pcl::console;
-
 extern const int default_number_samples;
 extern const float default_leaf_size;
 extern const bool default_write_cloud;

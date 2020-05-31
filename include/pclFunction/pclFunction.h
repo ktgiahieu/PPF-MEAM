@@ -64,7 +64,7 @@
 * @param cloud_out - cloud after the application of the filter
 * @return void
 */
-class CustomVisualizer 
+class CustomVisualizer
 {
 public:
 	bool ready = true;
@@ -72,8 +72,6 @@ public:
 	pcl::visualization::PCLVisualizer::Ptr viewer;
 	CustomVisualizer() :viewer(pcl::visualization::PCLVisualizer::Ptr(new pcl::visualization::PCLVisualizer("3D Viewer"))), v1(0), v2(0) { viewer->getRenderWindow()->GlobalWarningDisplayOff(); }
 	void init();
-	void addCloud(const PointCloudType::ConstPtr cloud, const std::string& ID, int& viewport);
-	void CustomVisualizer::updateCloud(const PointCloudType::ConstPtr cloud, const std::string& ID);
 };
 
 /**
@@ -83,7 +81,7 @@ within a specific range of X, Y and Z values.
 * @param cloud_out - cloud after the application of the filter
 * @return void
 */
-void passthrough(const PointCloudType::ConstPtr& cloud_in, vector<float> limit, PointCloudType::Ptr& cloud_out);
+void passthrough(const PointCloudType::ConstPtr& cloud_in, std::vector<float> limit, PointCloudType::Ptr& cloud_out);
 
 /*
 * @brief The Statistical Outliner Remove filter is used to remove noisy measurements, e.g. outliers, from a point cloud dataset 

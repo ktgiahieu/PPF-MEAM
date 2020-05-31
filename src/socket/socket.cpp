@@ -1,5 +1,7 @@
 #include "socket.h"
 
+using namespace std;
+
 int Socket::createSocketAndConnect() {
 	// Khoi tao socket client
 
@@ -52,3 +54,4 @@ void Socket::closeAllSockets() {
 	WSACleanup();// Cleanup winsoc
 
 };
+

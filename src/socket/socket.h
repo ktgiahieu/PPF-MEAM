@@ -11,13 +11,11 @@
 #pragma comment (lib, "ws2_32.lib")
 #include <thread>
 
-using namespace std;
-
 class Socket {
 private:
 	// Khai bao Socket
 	SOCKET clientSocket;
-	string ipAddress = "192.168.1.30";	// IP Address of the server
+	std::string ipAddress = "192.168.1.30";	// IP Address of the server
 	int port = 3333;
 	char rec_buffer[1024];
 

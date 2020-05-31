@@ -1,5 +1,9 @@
 #include "meshSampling.h"
 
+using namespace pcl;
+using namespace pcl::io;
+using namespace pcl::console;
+
 inline double uniform_deviate(int seed)
 {
 	double ran = seed * (1.0 / (RAND_MAX + 1.0));

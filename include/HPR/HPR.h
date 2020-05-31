@@ -20,9 +20,6 @@
 #include <pcl/filters/extract_indices.h>
 #include <Eigen/Dense>
 
-using namespace Eigen;
-using namespace pcl;
-
 void HPR(const pcl::PointCloud<pcl::PointXYZ>::ConstPtr& cloud_in, std::vector<float> camera_pos, int param, pcl::PointCloud<pcl::PointXYZ>::Ptr& cloud_out); // Hidden Point Removal
 
 #endif
