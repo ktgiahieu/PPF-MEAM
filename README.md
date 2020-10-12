@@ -1,6 +1,8 @@
 # PPF-MEAM
 PPF-MEAM is an implementation of the Point Pair Feature-Based Pose Estimation with Multiple Edge Appearance Models (PPF-MEAM) for Robotic Bin Picking from [Diyi Liu et al.](https://www.mdpi.com/1424-8220/18/8/2719/htm)
 
+The project takes a .STL mesh model as an input, then it will find every matches available in the scene provided as a .pcd file and a .jpg file.
+
 ### Requirements
 To build this project you will need:
 
