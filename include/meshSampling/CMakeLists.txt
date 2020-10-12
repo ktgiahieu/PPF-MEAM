@@ -1,4 +1,4 @@
-project(BinPicking)
+project(PPF_MEAM)
 
 set(MESHSAMPLING_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR} CACHE PATH "")
 
@@ -9,3 +9,4 @@ add_definitions(${PCL_DEFINITIONS})
 
 add_library(meshSampling SHARED STATIC meshSampling.cpp meshSampling.h)
 target_link_libraries (meshSampling ${PCL_LIBRARIES})
+target_include_directories(meshSampling PUBLIC ${PCL_INCLUDE_DIRS})

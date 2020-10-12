@@ -1,4 +1,4 @@
-project(BinPicking)
+project(PPF_MEAM)
 
 set(DATATYPE_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR} CACHE PATH "")
 
@@ -9,3 +9,4 @@ add_definitions(${PCL_DEFINITIONS})
 
 add_library(dataType SHARED STATIC dataType.h dataType.cpp)
 target_link_libraries (dataType ${PCL_LIBRARIES})
+target_include_directories(dataType PUBLIC ${PCL_INCLUDE_DIRS})

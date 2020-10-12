@@ -5,17 +5,8 @@ using namespace std;
 using namespace pcl;
 
 void CustomVisualizer::init() {
-	viewer->createViewPort(0.0, 0.0, 0.5, 1.0, v1);
-	viewer->setBackgroundColor(0, 0, 0, v1);
-	viewer->addText("Scene", 10, 10, "v1 text", v1);
-	//viewer->addCoordinateSystem(0.3, v1);
-
-	viewer->createViewPort(0.5, 0.0, 1.0, 1.0, v2);
-	viewer->setBackgroundColor(0.3, 0.3, 0.3, v2);
-	viewer->addText("Correspondence Grouping", 10, 10, "v2 text", v2);
-
-	//viewer->addCoordinateSystem(0.3, v2);
-
+	viewer->setBackgroundColor(0, 0, 0);
+	viewer->addCoordinateSystem(0.05);
 	viewer->initCameraParameters();
 }
 
@@ -27,18 +18,18 @@ within a specific range of X, Y and Z values.
 * @return void
 */
 
-void passthrough(const PointCloudType::ConstPtr& cloud_in, vector<float> limits, PointCloudType::Ptr& cloud_out)
+void passthrough(const pcl::PointCloud<pcl::PointXYZ>::ConstPtr& cloud_in, vector<float> limits, pcl::PointCloud<pcl::PointXYZ>::Ptr& cloud_out)
 {
-	pcl::PassThrough<PointType> pt;
+	pcl::PassThrough<PointXYZ> pt;
 	
-	PointCloudType::Ptr cloud_ptz_ptr(new PointCloudType);
+	pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_ptz_ptr(new pcl::PointCloud<pcl::PointXYZ>);
 	pt.setInputCloud(cloud_in);
 	pt.setFilterFieldName("z");
 	//pt.setFilterLimits(0.0, 0.85);//0.81
 	pt.setFilterLimits(limits[0], limits[1]);//0.81
 	pt.filter(*cloud_ptz_ptr);
 
-	PointCloudType::Ptr cloud_ptx_ptr(new PointCloudType);
+	pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_ptx_ptr(new pcl::PointCloud<pcl::PointXYZ>);
 	pt.setInputCloud(cloud_ptz_ptr);
 	pt.setFilterFieldName("x");
 	//pt.setFilterLimits(-0.3, 0.3);//0.37
@@ -59,9 +50,9 @@ void passthrough(const PointCloudType::ConstPtr& cloud_in, vector<float> limits,
 * @param cloud_out - cloud after the application of the filter
 * @return void
 */
-void statisticalOutlinerRemoval(const PointCloudType::Ptr& cloud_in, int numNeighbors, PointCloudType::Ptr& cloud_out) {
+void statisticalOutlinerRemoval(const pcl::PointCloud<pcl::PointXYZ>::Ptr& cloud_in, int numNeighbors, pcl::PointCloud<pcl::PointXYZ>::Ptr& cloud_out) {
 	// Create the filtering object
-	pcl::StatisticalOutlierRemoval<PointType> sor;
+	pcl::StatisticalOutlierRemoval<PointXYZ> sor;
 	sor.setInputCloud(cloud_in);
 	sor.setMeanK(numNeighbors);
 	sor.setStddevMulThresh(1.0);
@@ -75,10 +66,10 @@ void statisticalOutlinerRemoval(const PointCloudType::Ptr& cloud_in, int numNeig
 * @param cloud_out - cloud after the application of the filter
 * @return void
 */
-void voxelgrid(const PointCloudType::Ptr& cloud_in, float size_leaf, PointCloudType::Ptr& cloud_out)
+void voxelgrid(const pcl::PointCloud<pcl::PointXYZ>::Ptr& cloud_in, float size_leaf, pcl::PointCloud<pcl::PointXYZ>::Ptr& cloud_out)
 {
 	// cout << "So diem truoc khi loc voxel " << cloud_in->points.size() << endl;
-	pcl::VoxelGrid<PointType> vg;
+	pcl::VoxelGrid<PointXYZ> vg;
 	vg.setInputCloud(cloud_in);
 	vg.setLeafSize(size_leaf, size_leaf, size_leaf); // 3mm
 	vg.setDownsampleAllData(true);
@@ -93,9 +84,9 @@ void voxelgrid(const PointCloudType::Ptr& cloud_in, float size_leaf, PointCloudT
 * @param cloud_out - cloud after the application of the filter
 * @return void
 */
-void uniformsampling(const PointCloudType::Ptr& cloud_in, float radius, PointCloudType::Ptr& cloud_out)
+void uniformsampling(const pcl::PointCloud<pcl::PointXYZ>::Ptr& cloud_in, float radius, pcl::PointCloud<pcl::PointXYZ>::Ptr& cloud_out)
 {
-	pcl::UniformSampling<PointType> uniform_sampling;
+	pcl::UniformSampling<PointXYZ> uniform_sampling;
 	uniform_sampling.setInputCloud(cloud_in);
 	uniform_sampling.setRadiusSearch(radius);
 	uniform_sampling.filter(*cloud_out);
@@ -108,12 +99,12 @@ remove the table from the point cloud leaving only the objects.
 * @param cloud_out - cloud after the application of the filter - cloud after the application of the filter
 * @return void
 */
-void sacsegmentation_extindices(const PointCloudType::Ptr& cloud_in,double dist_threshold, PointCloudType::Ptr& cloud_out)
+void sacsegmentation_extindices(const pcl::PointCloud<pcl::PointXYZ>::Ptr& cloud_in,double dist_threshold, pcl::PointCloud<pcl::PointXYZ>::Ptr& cloud_out)
 {
 	// Identify the table
 	pcl::PointIndices::Ptr sacs_inliers(new pcl::PointIndices);
 	pcl::ModelCoefficients::Ptr sacs_coefficients(new pcl::ModelCoefficients);
-	pcl::SACSegmentation<PointType> sacs;
+	pcl::SACSegmentation<PointXYZ> sacs;
 	sacs.setOptimizeCoefficients(true);
 	sacs.setModelType(pcl::SACMODEL_PLANE);
 	sacs.setMethodType(pcl::SAC_RANSAC);
@@ -122,7 +113,7 @@ void sacsegmentation_extindices(const PointCloudType::Ptr& cloud_in,double dist_
 	sacs.setInputCloud(cloud_in);
 	sacs.segment(*sacs_inliers, *sacs_coefficients);
 	// Remove the table
-	pcl::ExtractIndices<PointType> ei;
+	pcl::ExtractIndices<PointXYZ> ei;
 	ei.setInputCloud(cloud_in);
 	ei.setIndices(sacs_inliers);
 	ei.setNegative(true);
@@ -136,10 +127,10 @@ the minimum number of neighbors desired.
 * @param cloud_out - cloud after the application of the filter - cloud after the application of the filter
 * @return void
 */
-void radiusoutlierremoval(const PointCloudType::Ptr& cloud_in, float radius, uint16_t min_neighbor, PointCloudType::Ptr& cloud_out)
+void radiusoutlierremoval(const pcl::PointCloud<pcl::PointXYZ>::Ptr& cloud_in, float radius, uint16_t min_neighbor, pcl::PointCloud<pcl::PointXYZ>::Ptr& cloud_out)
 {
 	// Remove isolated points
-	pcl::RadiusOutlierRemoval<PointType> ror;
+	pcl::RadiusOutlierRemoval<PointXYZ> ror;
 	ror.setInputCloud(cloud_in);
 	ror.setRadiusSearch(radius);    //2cm        
 	ror.setMinNeighborsInRadius(min_neighbor);   //150   
@@ -151,10 +142,10 @@ void radiusoutlierremoval(const PointCloudType::Ptr& cloud_in, float radius, uin
 * @ cloud_in - cloud input PointType
 * @ cloud_out - cloud output XYZRGBNormal
 */
-void normal(const PointCloudType::Ptr& cloud_in, int k, float r, char mode, PointCloudNormalType::Ptr& normal_out)
+void normal(const pcl::PointCloud<pcl::PointXYZ>::Ptr& cloud_in, int k, float r, char mode, PointCloudNormalType::Ptr& normal_out)
 {
-	pcl::NormalEstimationOMP<PointType, pcl::Normal> ne;
-	pcl::search::KdTree<PointType>::Ptr tree(new pcl::search::KdTree<PointType>);
+	pcl::NormalEstimationOMP<PointXYZ, pcl::Normal> ne;
+	pcl::search::KdTree<PointXYZ>::Ptr tree(new pcl::search::KdTree<PointXYZ>);
 	// Calculate all the normals of the entire surface
 	ne.setInputCloud(cloud_in);
 	ne.setNumberOfThreads(8);
@@ -171,14 +162,14 @@ void normal(const PointCloudType::Ptr& cloud_in, int k, float r, char mode, Poin
 	}
 }
 
-double computeCloudResolution(const PointCloudType::ConstPtr &cloud)
+double computeCloudResolution(const pcl::PointCloud<pcl::PointXYZ>::ConstPtr &cloud)
 {
 	double res = 0.0;
 	int n_points = 0;
 	int nres;
 	std::vector<int> indices(2);
 	std::vector<float> sqr_distances(2);
-	pcl::search::KdTree<PointType> tree;
+	pcl::search::KdTree<PointXYZ> tree;
 	tree.setInputCloud(cloud);
 
 	for (std::size_t i = 0; i < cloud->size(); ++i)
@@ -200,4 +191,32 @@ double computeCloudResolution(const PointCloudType::ConstPtr &cloud)
 		res /= n_points;
 	}
 	return res;
+}
+
+double computeCloudDiameter(const pcl::PointCloud<pcl::PointXYZ>::ConstPtr &cloud)
+{
+	pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_downsampled(new pcl::PointCloud<pcl::PointXYZ>());
+	pcl::VoxelGrid<PointXYZ> vg;
+	vg.setInputCloud(cloud);
+	vg.setLeafSize(0.005f, 0.005f, 0.005f);
+	vg.setDownsampleAllData(false);
+	vg.filter(*cloud_downsampled);
+
+	double diameter_sqr = 0;
+	for (size_t i = 0; i < cloud_downsampled->points.size(); i += 10)
+	{
+		for (size_t j = 0; j < cloud_downsampled->points.size(); j += 10)
+		{
+			if (i == j)
+				continue;
+			double distance_sqr = (cloud_downsampled->points[i].x - cloud_downsampled->points[j].x)*(cloud_downsampled->points[i].x - cloud_downsampled->points[j].x)
+				+ (cloud_downsampled->points[i].y - cloud_downsampled->points[j].y)*(cloud_downsampled->points[i].y - cloud_downsampled->points[j].y)
+				+ (cloud_downsampled->points[i].z - cloud_downsampled->points[j].z)*(cloud_downsampled->points[i].z - cloud_downsampled->points[j].z);
+			if (distance_sqr > diameter_sqr)
+			{
+				diameter_sqr = distance_sqr;
+			}
+		}
+	}
+	return sqrt(diameter_sqr);
 }

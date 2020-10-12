@@ -68,9 +68,8 @@ class CustomVisualizer
 {
 public:
 	bool ready = true;
-	int v1; int v2;
 	pcl::visualization::PCLVisualizer::Ptr viewer;
-	CustomVisualizer() :viewer(pcl::visualization::PCLVisualizer::Ptr(new pcl::visualization::PCLVisualizer("3D Viewer"))), v1(0), v2(0) { viewer->getRenderWindow()->GlobalWarningDisplayOff(); }
+	CustomVisualizer() :viewer(pcl::visualization::PCLVisualizer::Ptr(new pcl::visualization::PCLVisualizer("3D Viewer"))) { viewer->getRenderWindow()->GlobalWarningDisplayOff(); }
 	void init();
 };
 
@@ -81,7 +80,7 @@ within a specific range of X, Y and Z values.
 * @param cloud_out - cloud after the application of the filter
 * @return void
 */
-void passthrough(const PointCloudType::ConstPtr& cloud_in, std::vector<float> limit, PointCloudType::Ptr& cloud_out);
+void passthrough(const pcl::PointCloud<pcl::PointXYZ>::ConstPtr& cloud_in, std::vector<float> limit, pcl::PointCloud<pcl::PointXYZ>::Ptr& cloud_out);
 
 /*
 * @brief The Statistical Outliner Remove filter is used to remove noisy measurements, e.g. outliers, from a point cloud dataset 
@@ -90,7 +89,7 @@ void passthrough(const PointCloudType::ConstPtr& cloud_in, std::vector<float> li
 * @param cloud_out - cloud after the application of the filter
 * @return void
 */
-void statisticalOutlinerRemoval(const PointCloudType::Ptr& cloud_in, int numNeighbors, PointCloudType::Ptr& cloud_out);
+void statisticalOutlinerRemoval(const pcl::PointCloud<pcl::PointXYZ>::Ptr& cloud_in, int numNeighbors, pcl::PointCloud<pcl::PointXYZ>::Ptr& cloud_out);
 /*
 * @brief The VoxelGrid filter is used to simplify the cloud, by wrapping the point cloud
   with a three-dimensional grid and reducing the number of points to the center points within each bloc of the grid.
@@ -98,9 +97,9 @@ void statisticalOutlinerRemoval(const PointCloudType::Ptr& cloud_in, int numNeig
 * @param cloud_vg_ptr - cloud after the application of the filter
 * @return void
 */
-void voxelgrid(const PointCloudType::Ptr& cloud_in, float size_leaf, PointCloudType::Ptr& cloud_out);
+void voxelgrid(const pcl::PointCloud<pcl::PointXYZ>::Ptr& cloud_in, float size_leaf, pcl::PointCloud<pcl::PointXYZ>::Ptr& cloud_out);
 
-void uniformsampling(const PointCloudType::Ptr& cloud_in, float radius, PointCloudType::Ptr& cloud_out);
+void uniformsampling(const pcl::PointCloud<pcl::PointXYZ>::Ptr& cloud_in, float radius, pcl::PointCloud<pcl::PointXYZ>::Ptr& cloud_out);
 
 /*
 * @brief The SACSegmentation and the ExtractIndices filters are used to identify and
@@ -109,7 +108,7 @@ remove the table from the point cloud leaving only the objects.
 * @param cloud_out - cloud after the application of the filter - cloud after the application of the filter
 * @return void
 */
-void sacsegmentation_extindices(const PointCloudType::Ptr& cloud_in, double dist_threshold, PointCloudType::Ptr& cloud_out);
+void sacsegmentation_extindices(const pcl::PointCloud<pcl::PointXYZ>::Ptr& cloud_in, double dist_threshold, pcl::PointCloud<pcl::PointXYZ>::Ptr& cloud_out);
 
 /*
 * @brief The RadiusOutlierRemoval filter is used to remove isolated point according to
@@ -118,14 +117,14 @@ the minimum number of neighbors desired.
 * @param cloud_out - cloud after the application of the filter - cloud after the application of the filter
 * @return void
 */
-void radiusoutlierremoval(const PointCloudType::Ptr& cloud_in, float radius, uint16_t min_neighbor, PointCloudType::Ptr& cloud_out);
+void radiusoutlierremoval(const pcl::PointCloud<pcl::PointXYZ>::Ptr& cloud_in, float radius, uint16_t min_neighbor, pcl::PointCloud<pcl::PointXYZ>::Ptr& cloud_out);
 
 /*
 * @Tinh phap tuyen dam may diem
-* @ cloud_in - cloud input PointCloudType
+* @ cloud_in - cloud input pcl::PointCloud<pcl::PointXYZ>
 * @ cloud_out - cloud output XYZRGBNormal
 */
-void normal(const PointCloudType::Ptr& cloud_in, int k, float r, char mode, PointCloudNormalType::Ptr& normal_out);
+void normal(const pcl::PointCloud<pcl::PointXYZ>::Ptr& cloud_in, int k, float r, char mode, PointCloudNormalType::Ptr& normal_out);
 
 /*
 * @brief The Cylinder model segmentation
@@ -135,6 +134,8 @@ void normal(const PointCloudType::Ptr& cloud_in, int k, float r, char mode, Poin
 * @return void
 */
 
-double computeCloudResolution(const PointCloudType::ConstPtr &cloud);
+double computeCloudResolution(const pcl::PointCloud<pcl::PointXYZ>::ConstPtr &cloud);
+
+double computeCloudDiameter(const pcl::PointCloud<pcl::PointXYZ>::ConstPtr &cloud);
 
 #endif

@@ -192,6 +192,6 @@ void meshSampling(std::string filename, int num_samples, float input_leaf_size, 
 		savePCDFileASCII(newfilename, *cloud_xyz);
 
 	*cloud_out = *cloud_xyz;
-	
+	std::cout << "Done Converting..." << std::endl;
 }
 

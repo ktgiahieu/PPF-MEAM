@@ -16,10 +16,10 @@ typedef pcl::PointCloud<NormalType> PointCloudNormalType;
 typedef pcl::ReferenceFrame RFType;
 
 typedef pcl::SHOT352 DescriptorTypeSHOT;
-typedef pcl::SHOTEstimationOMP<PointType, NormalType, DescriptorTypeSHOT> EstimatorTypeSHOT;
+typedef pcl::SHOTEstimationOMP<pcl::PointXYZ, NormalType, DescriptorTypeSHOT> EstimatorTypeSHOT;
 
 typedef pcl::PPFSignature DescriptorTypePPF;
-typedef pcl::PPFEstimation<PointType, NormalType, DescriptorTypePPF> EstimatorTypePPF;
+typedef pcl::PPFEstimation<pcl::PointXYZ, NormalType, DescriptorTypePPF> EstimatorTypePPF;
 
 typedef pcl::PointNormal PointXYZTangent;
 
