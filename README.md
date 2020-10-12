@@ -5,7 +5,9 @@ PPF-MEAM is an implementation of the Point Pair Feature-Based Pose Estimation wi
 To build this project you will need:
 
 ⋅⋅* Point Cloud Library (PCL 1.7)
+
 ⋅⋅* Eigen library 3.0
+
 ⋅⋅* cmake 2.8
 
 ### Compile and run
