@@ -20,4 +20,4 @@ To build this project you will need:
     make
     ./demo
 ```
-![Result](https://github.com/ktgiahieu/PPF-MEAM/blob/master/images/nap.PNG)
+![Result](https://github.com/ktgiahieu/PPF-MEAM/blob/main/images/nap.PNG)
