@@ -2,7 +2,7 @@ project(PPF_MEAM)
 
 set(B2BTL_MEAM_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR} CACHE PATH "")
 
-#SET(OpenCV_DIR /home/ktgiahieu/Library/opencv/build)
+SET(OpenCV_DIR /home/ktgiahieu/Library/opencv/build)
 
 find_package( OpenCV REQUIRED )
 

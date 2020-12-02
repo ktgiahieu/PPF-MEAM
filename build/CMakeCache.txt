@@ -315,6 +315,9 @@ OPENNI_INCLUDE_DIRS:PATH=/usr/include/ni
 //Path to a library.
 OPENNI_LIBRARY:FILEPATH=/usr/lib/libOpenNI.so
 
+//The directory containing a CMake configuration file for OpenCV.
+OpenCV_DIR:PATH=OpenCV_DIR-NOTFOUND
+
 PCLFUNCTION_INCLUDE_DIR:PATH=/home/ktgiahieu/Workspace/PPF-MEAM/include/pclFunction
 
 //path to 2d headers
