@@ -449,7 +449,7 @@ void DescriptorB2BTL_MEAM::_3D_Matching()
 	GoHv.setSceneCloud(segmented_scene_XYZ);
 	GoHv.addModels(instances, true);  //Models to verify
 	GoHv.setResolution(hv_resolution_);
-	GoHv.setResolutionOccupancyGrid(hv_occupancy_grid_resolution_);
+	//GoHv.setResolutionOccupancyGrid(hv_occupancy_grid_resolution_);
 	GoHv.setInlierThreshold(hv_inlier_th_);
 	GoHv.setOcclusionThreshold(hv_occlusion_th_);
 	GoHv.setRegularizer(hv_regularizer_);

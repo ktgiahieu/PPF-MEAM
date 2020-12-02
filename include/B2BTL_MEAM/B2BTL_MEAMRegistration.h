@@ -77,12 +77,12 @@ namespace pcl
 		};
 
 		using FeatureHashMapType = std::unordered_multimap<HashKeyStruct, std::pair<std::size_t, std::size_t>, HashKeyStruct>;
-      using FeatureHashMapTypePtr = shared_ptr<FeatureHashMapType>;
-      using Ptr = shared_ptr<B2BTL_MEAMHashMapSearch>;
-      using ConstPtr = shared_ptr<const B2BTL_MEAMHashMapSearch>;
+      		using FeatureHashMapTypePtr = std::shared_ptr<FeatureHashMapType>;
+      		using Ptr = std::shared_ptr<B2BTL_MEAMHashMapSearch>;
+      		using ConstPtr = std::shared_ptr<const B2BTL_MEAMHashMapSearch>;
 
-	  using EncodedHashMapType = std::unordered_multimap<HashKeyStruct, std::vector<size_t>, HashKeyStruct>;
-	  using EncodedHashMapTypePtr = std::shared_ptr<EncodedHashMapType>;
+	  	using EncodedHashMapType = std::unordered_multimap<HashKeyStruct, std::vector<size_t>, HashKeyStruct>;
+	  	using EncodedHashMapTypePtr = std::shared_ptr<EncodedHashMapType>;
 
 		//typedef std::unordered_multimap<HashKeyStruct, std::pair<size_t, size_t> > FeatureHashMapType;
 		//typedef std::shared_ptr<FeatureHashMapType> FeatureHashMapTypePtr;

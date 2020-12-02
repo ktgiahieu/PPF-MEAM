@@ -1,0 +1,2 @@
+/usr/bin/ar qc libHPR.a  CMakeFiles/HPR.dir/HPR.cpp.o
+/usr/bin/ranlib libHPR.a

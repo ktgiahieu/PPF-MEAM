@@ -1,0 +1,2 @@
+/usr/bin/ar qc libB2BTL_MEAM.a  CMakeFiles/B2BTL_MEAM.dir/B2BTL_MEAM.cpp.o CMakeFiles/B2BTL_MEAM.dir/B2BTL_MEAMRegistration.cpp.o
+/usr/bin/ranlib libB2BTL_MEAM.a

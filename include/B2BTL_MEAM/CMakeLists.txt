@@ -2,6 +2,8 @@ project(PPF_MEAM)
 
 set(B2BTL_MEAM_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR} CACHE PATH "")
 
+#SET(OpenCV_DIR /home/ktgiahieu/Library/opencv/build)
+
 find_package( OpenCV REQUIRED )
 
 add_library(B2BTL_MEAM SHARED STATIC B2BTL_MEAM.cpp B2BTL_MEAM.h B2BTL_MEAMRegistration.cpp B2BTL_MEAMRegistration.h)

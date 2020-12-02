@@ -1,0 +1,2 @@
+/usr/bin/ar qc libmeshSampling.a  CMakeFiles/meshSampling.dir/meshSampling.cpp.o
+/usr/bin/ranlib libmeshSampling.a

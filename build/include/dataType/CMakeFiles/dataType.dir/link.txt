@@ -1,0 +1,2 @@
+/usr/bin/ar qc libdataType.a  CMakeFiles/dataType.dir/dataType.cpp.o
+/usr/bin/ranlib libdataType.a

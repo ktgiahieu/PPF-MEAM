@@ -15,13 +15,13 @@ int main()
 	std::cout << "Descriptor type: " << descr->getType() << endl;
 	
 	//Load model
-	descr->setModelPath("../../data/model/nap.STL");
+	descr->setModelPath("../data/model/nap/nap.STL");
 	
 	std::cout << "Done Preparation ... !" << std::endl;
 
 	//Load scene cloud
 	pcl::PointCloud<pcl::PointXYZRGBA>::Ptr cloud (new pcl::PointCloud<pcl::PointXYZRGBA>);
-	if (pcl::io::loadPCDFile<pcl::PointXYZRGBA> ("../../data/scene/nap/scene2.pcd", *cloud) == -1) //* load the file
+	if (pcl::io::loadPCDFile<pcl::PointXYZRGBA> ("../data/scene/nap/scene4.pcd", *cloud) == -1) //* load the file
     {
 		PCL_ERROR ("Couldn't read file test_pcd.pcd \n");
 		return (-1);
@@ -29,7 +29,7 @@ int main()
 	descr->storeLatestCloud(cloud);
 
 	//Load scene image
-	cv::Mat im = cv::imread("../../data/scene/nap/scene2.jpg", CV_LOAD_IMAGE_COLOR);
+	cv::Mat im = cv::imread("../data/scene/nap/scene4.jpg", 1);
 	descr->storeLatestImage(im);
 
 	//We MUST process and visualize from different thread, or the program will crash
