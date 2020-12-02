@@ -20,6 +20,6 @@ To build this project you will need:
     cd build
     cmake ..
     make
-    ./demo
+    ./PPF-MEAM
 ```
 ![Result](https://github.com/ktgiahieu/PPF-MEAM/blob/master/images/nap.PNG)
