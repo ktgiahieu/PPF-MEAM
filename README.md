@@ -10,6 +10,8 @@ To build this project you will need:
 
 * Eigen library 3.0
 
+* OpenCV
+
 * cmake 2.8
 
 ### Compile and run
