@@ -1,2 +1,0 @@
-/usr/bin/ar qc libpclFunction.a  CMakeFiles/pclFunction.dir/pclFunction.cpp.o
-/usr/bin/ranlib libpclFunction.a
